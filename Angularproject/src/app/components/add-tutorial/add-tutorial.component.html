@@ -1,0 +1,37 @@
+<form #userName="ngForm"> 
+  <div class="form-group">
+      <label for="name">Movie Name:</label>
+      <input type="text"  class="form-control" name="name" [(ngModel)]="model.name"  #name="ngModel" (input)="keyPressAlphanumeric($event)" required/>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+          <div *ngIf="name.errors">
+            Movie Name is required!!
+          </div>
+        </div>
+        <div *ngIf="show1">Movie Name should be only alphanumeric</div>
+      </div>
+<br /><br />
+<div class="form-group">
+<label for="rating">Give Rating:</label>
+<input type="text" class="form-control" name="rating" [(ngModel)]="model.rating"  #rating="ngModel" (input)="keyPressNumbers($event)" required />
+<div *ngIf="rating.invalid && (rating.dirty || rating.touched)">                               
+  <div *ngIf="rating.errors">Rating is required!!</div></div>
+  <div *ngIf="show">Rating needs to be a number: eg: 2.5. Rating is on Scale 1-5</div>
+</div><br /><br />
+<div class="form-group">
+<label for="category">Select Genre:</label>
+<select name="category" class="form-control" [(ngModel)]="model.category"  #category="ngModel"><option  value="--Select--">--Select--</option>
+<option value="Drama">Drama</option>
+<option value="Fiction">Fiction</option>
+<option value="Satire">Satire</option></select></div>
+<div *ngIf="category.value==select1">
+    Select Genre!!!
+</div>
+<br /><br />
+<div class="form-group">
+  <button class="btn btn-success" (click)="onClickSubmit(userName.value)">Add Movie</button>
+</div>
+<div *ngIf="submitted">
+  <h4>Movie was submitted successfully!</h4>
+  <button class="btn btn-success" (click)="newTutorial()">New Movie</button>
+</div>
+</form>

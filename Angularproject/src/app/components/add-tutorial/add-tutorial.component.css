@@ -1,0 +1,17 @@
+label{
+  color:rgb(26, 26, 194);
+  }
+  select{
+      border-color: blue;
+  }
+  select:hover{
+      border-color: blue;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important; 
+  }
+  .select:focus
+     {
+      border-color:     #800080;
+      box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+      color: #222; 
+      outline: none
+  }

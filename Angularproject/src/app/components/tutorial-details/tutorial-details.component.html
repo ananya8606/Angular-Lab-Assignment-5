@@ -1,0 +1,91 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentTutorial.id">
+    <h4>Movie</h4>
+    <div>
+      <label><strong>Name:</strong></label> 
+      {{ currentTutorial.name }}
+    </div>
+    <div>
+      <label><strong>Rating:</strong></label>
+      {{ currentTutorial.rating }}
+    </div>
+    <div>
+      <label><strong>Category:</strong></label>
+      {{ currentTutorial.category }}
+    </div>
+    <a
+      class="badge badge-warning"
+      routerLink="/tutorials/{{ currentTutorial.id }}"
+    >
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentTutorial">
+    <br />
+    <p>Please click on a Movie...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentTutorial.id" class="edit-form">
+    <h4>Movie</h4>
+    <form #userName="ngForm">
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="model.name"
+          (input)="keyPressAlphanumeric($event)"
+          #name="ngModel"
+          name="name"
+         required/>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+          <div *ngIf="name.errors">
+            Movie Name is required!!
+          </div>
+        </div>
+        <div *ngIf="show1">Movie Name should be only alphanumeric</div>
+        </div>
+        <br/><br/>
+        <div class="form-group">
+          <label><strong>Rating: </strong></label>
+          <input type="text" class="form-control" name="rating" [(ngModel)]="model.rating"(input)="keyPressNumbers($event)" #rating="ngModel" (input)="keyPressNumbers($event)" required />
+          <div *ngIf="rating.invalid && (rating.dirty || rating.touched)">                               
+            <div *ngIf="rating.errors">Rating is required!!</div></div>
+            <div *ngIf="show">Rating needs to be a number: eg: 2.5. Rating is on Scale 1-5</div>
+        </div>
+<br/><br/>
+        <div class="form-group">
+          <label for="category">Category: </label>
+          <input
+            type="text"
+            class="form-control"
+            id="category"
+            [(ngModel)]="currentTutorial.category"
+            name="category"
+          />
+        </div>
+<br/>
+<br/>
+    <button class="badge badge-danger mr-2" (click)="onClickSubmit1(userName.value)">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="onClickSubmit(userName.value)"
+    >
+      Update
+    </button>
+    </form>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentTutorial.id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+</ng-template>
